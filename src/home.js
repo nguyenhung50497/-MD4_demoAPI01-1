@@ -7,16 +7,20 @@ function showList() {
         headers : {
             'Content-Type': 'application/json',
         },
-        success: (products) => {
+        success: (data) => {
             let html = ``;
-            products.map((item) => {
+            let categories = ``;
+            data[1].map((item) => {
+                categories += `<option value="${item.idCategory}">${item.nameCategory}</option>`
+            })
+            data[0].map((item) => {
                 html += `
                 <tr>
                     <th scope="row">${item.id}</th>
                     <td>${item.name}</td>
                     <td>${item.price}</td>
                     <td>${item.image}</td>
-                    <td>${item.category}</td>
+                    <td>${item.nameCategory}</td>
                     <td>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal${item.id}">Edit</button>
                         <div class="modal fade" id="editModal${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,8 +47,10 @@ function showList() {
                                 </div>
                                 <br>
                                 <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">Category</span>
-                                    <input type="text" class="form-control" id="category${item.id}" value="${item.category}" aria-label="Username" aria-describedby="addon-wrapping">
+                                    <select id="category${item.id}" class="form-select" aria-label="Default select example">
+                                        <option value="${item.idCategory}">${item.nameCategory}</option>
+                                        ${categories}
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -83,32 +89,23 @@ function showList() {
 }
 
 function showHome() {
-    $.ajax({
-        type: "GET",
-        url: 'http://localhost:3000/products',
-        headers : {
-            'Content-Type': 'application/json',
-        },
-        success: () => {
-            let html = `
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Category</th>
-                        <th scope="col" colspan="2">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    </tbody>
-                </table>`;
-            $('#body').html(html);
-            showList();
-        }
-    })
+    let html = `
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Category</th>
+                    <th scope="col" colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>`;
+    $('#body').html(html);
+    showList();
 }
 
 function showFormAdd() {

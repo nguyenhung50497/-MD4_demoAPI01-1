@@ -122,12 +122,14 @@ function showBody() {
                 </div> <!-- end of container -->
             </header> <!-- end of header -->
             <!-- end of header -->
-        
-        
-            <div class="container mt-5 mb-5" id="body" >
-                
-            </div>
             
+            <div class="container mt-5 mb-5">
+                
+                <div class="row" id="body">
+                
+                </div>      
+                    
+            </div>
             
             <!-- Works -->
             <div class="basic-4">
@@ -210,7 +212,7 @@ function showBody() {
                             <p class="p-heading">Listed below are some of the most representative projects I've worked on. They range from basic web design for presentation sites to advanced web development for online shops</p>
                         </div> <!-- end of col -->
                     </div> <!-- end of row -->
-                    <div class="row">
+                    <div class="row" style="margin: 100px;">
                         <div class="col-lg-12">
                             <div class="text-container">
                                 <div class="image-container">
